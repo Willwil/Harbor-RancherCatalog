@@ -19,8 +19,8 @@ registry:
     - 5001:5001
   command:
     ["serve", "/etc/registry/config.yml"]
-  #depends_on:
-  #  - log
+  links:
+    - log
   log_driver: "syslog"
   log_opt:
       syslog-address: "tcp://127.0.0.1:1514"
@@ -34,8 +34,8 @@ mysql:
     - ${DBDIR}:/var/lib/mysql
   environment:
     - MYSQL_ROOT_PASSWORD=${DBPASSWD}
-  #depends_on:
-  #  - log
+  links:
+    - log
   log_driver: "syslog"
   log_opt:
       syslog-address: "tcp://127.0.0.1:1514"
@@ -68,8 +68,9 @@ ui:
     - VERIFY_REMOTE_CERT=on
   volumes:
     - ${UICFGDIR}:/etc/ui
-  #depends_on:
-  #  - log
+  links:
+    - log
+    - mysql
   log_driver: "syslog"
   log_opt:
       syslog-address: "tcp://127.0.0.1:1514"
@@ -97,8 +98,9 @@ jobservice:
   volumes:
     - ${JOBSRVSLOGDIR}:/var/log/jobs
     - ${JOBSRVSCFGDIR}/app.conf:/etc/jobservice/app.conf
-  #depends_on:
-  #  - ui
+  links:
+    - log
+    - mysql
   log_driver: "syslog"
   log_opt:
       syslog-address: "tcp://127.0.0.1:1514"
@@ -112,11 +114,10 @@ proxy:
   ports:
     - 80:80
     - 443:443
-  #depends_on:
-  #  - mysql
-  #  - registry
-  #  - ui
-  #  - log
+  links:
+    - registry
+    - ui
+    - log
   log_driver: "syslog"
   log_opt:
       syslog-address: "tcp://127.0.0.1:1514"
