@@ -1,0 +1,79 @@
+.catalog:
+  name: "Wise2C-Registry"
+  version: "v0.1"
+  description: "Wise2c Docker Registry"
+  uuid: registry-1
+  questions: 
+    - variable: "LOGDIR"
+      label: "Wise2C Registry Log Forlder"
+      description: "Forlder on which to storage wise2c registry logs"
+      required: true
+      type: "string"
+    - variable: "REGIMGDIR"
+      label: "Wise2C Registry Storage Forlder"
+      description: "Forlder on which to storage wise2c registry images"
+      required: true
+      type: "string"
+    - variable: "REGCFGDIR"
+      label: "Wise2C Registry Config Forlder"
+      description: "Forlder on which to storage wise2c registry configurations"
+      required: true
+      type: "string"
+    - variable: "DBDIR"
+      label: "Wise2C Registry Mysql Data Forlder"
+      description: "Forlder on which to storage wise2c database data."
+      required: true
+      type: "string"
+    - variable: "DBPASSWD"
+      label: "Wise2C Registry Mysql Password"
+      description: "wise2c registry database password."
+      required: true
+      type: "string"
+    - variable: "UIREGURL"
+      label: "Wise2C Registry URL"
+      description: "wise2c registry URL."
+      required: true
+      type: "string"
+    - variable: "UIRADMINURL"
+      label: "Wise2C Registry Admin Password"
+      description: "wise2c registry admin password."
+      required: true
+      type: "string"
+    - variable: "UIURL"
+      label: "Wise2C Registry URL(http/https)"
+      description: "wise2c registry URL(http/https)."
+      required: true
+      type: "string"
+    - variable: "UICFGDIR"
+      label: "Wise2C Registry UI Configuration Forlder"
+      description: "wise2c registry UI configuration DIR (include app.conf & private_key.pem)."
+      required: true
+      type: "string"
+    - variable: "JOBSRVSLOGDIR"
+      label: "Wise2C Registry Jobservice Log Forlder"
+      description: "wise2c registry jobservice log DIR."
+      required: true
+      type: "string"
+    - variable: "JOBSRVSCFGDIR"
+      label: "Wise2C Registry Jobservice Configuration Forlder"
+      description: "wise2c registry jobservice configuration DIR (include app.conf)."
+      required: true
+      type: "string"
+    - variable: "PROXYCFGDIR"
+      label: "Wise2C Registry Proxy Configuration Forlder"
+      description: "wise2c registry proxy configuration DIR (include cert & nginx.conf)."
+      required: true
+      type: "string"
+
+log:
+  scale: 1
+registry:
+  scale: 1
+mysql:
+  scale: 1
+ui:
+  scale: 1
+jobservice:
+  scale: 1
+proxy:
+  scale: 1
