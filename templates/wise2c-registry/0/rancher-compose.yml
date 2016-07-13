@@ -43,5 +43,5 @@
 
 log:
   scale: 1
-registry:
+mysql:
   scale: 1
