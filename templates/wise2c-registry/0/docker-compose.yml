@@ -1,10 +1,10 @@
 registry-datavolume:
   image: busybox
   volumes: 
-    - ${STORAGEDIR}:/storage
-    - ${MYSQLDIR}:/var/lib/mysql
-    - ${LOGDIR}:/var/log
-    - ${CFGDIR}:/etc
+    - /storage
+    - /var/lib/mysql
+    - /var/log
+    - /etc
   net: none
   command: /bin/true
   labels:
@@ -14,8 +14,8 @@ registry-datavolume:
 log:
   image: wise2c/harbor-log
   container_name: wise2c-reg-log
-  #volumes_from:
-  #  - registry-datavolume
+  volumes_from:
+    - registry-datavolume
   ports:
     - 1514:514
   labels:
