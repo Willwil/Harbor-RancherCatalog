@@ -22,9 +22,9 @@
       required: true
       default: Harbor,123
       type: "string"
-    - variable: "STORAGEDIR"
-      label: "Wise2C Registry Backend Storage Forlder"
-      description: "wise2c registry backend storage DIR."
+    - variable: "DATADIR"
+      label: "Wise2C Registry Data Forlder"
+      description: "wise2c registry data DIR."
       required: true
       default: "/registry/data"
       type: "string"
@@ -32,19 +32,13 @@
       label: "Wise2C Registry Log Forlder"
       description: "Forlder on which to storage wise2c registry logs"
       required: true
-      default: "/registry/log"
+      default: "/var/log/harbor"
       type: "string"
     - variable: "CFGDIR"
       label: "Wise2C Registry Config Forlder"
       description: "Forlder on which to storage wise2c registry configurations"
       required: true
-      default: "/registry/config"
-      type: "string"
-    - variable: "MYSQLDIR"
-      label: "Wise2C Registry Mysql Forlder"
-      description: "Forlder on which to storage mysql configurations"
-      required: true
-      default: "/registry/config"
+      default: "/root/harbor/Deploy/config"
       type: "string"
 
 log:

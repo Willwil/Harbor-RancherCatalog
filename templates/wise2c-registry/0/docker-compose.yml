@@ -1,9 +1,13 @@
 registry-datavolume:
   image: busybox
   volumes: 
-    - ${STORAGEDIR}:/storage
-    - ${MYSQLDIR}:/var/lib/mysql
-    - ${LOGDIR}:/var/log
+    - ${LOGDIR}/harbor:/var/log/docker/
+    - ${DATADIR}/job_logs:/var/log/jobs
+    - ${DATADIR}/database:/var/lib/mysql
+    - ${DATADIR}/registry:/storage
+    - ${CFGDIR}/ui:/etc/ui
+    - ${CFGDIR}/nginx:/etc/nginx
+    - ${CFGDIR}/registry:/etc/registry/
   net: none
   command: /bin/true
   labels:
@@ -15,3 +19,5 @@ log:
     - registry-datavolume
   ports:
     - 1514:514
+  labels:
+    io.rancher.scheduler.affinity: "hostname=agent-1"
