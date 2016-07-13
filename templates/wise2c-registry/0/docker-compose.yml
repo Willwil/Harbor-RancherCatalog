@@ -14,8 +14,8 @@ registry-datavolume:
 log:
   image: wise2c/harbor-log
   container_name: wise2c-reg-log
-  volumes_from:
-    - registry-datavolume
+  #volumes_from:
+  #  - registry-datavolume
   ports:
     - 1514:514
   labels:
