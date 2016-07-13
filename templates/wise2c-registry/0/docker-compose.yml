@@ -4,7 +4,6 @@ registry-datavolume:
     - ${STORAGEDIR}:/storage
     - ${MYSQLDIR}:/var/lib/mysql
     - ${LOGDIR}:/var/log
-    - ${CFGDIR}:/etc
   net: none
   command: /bin/true
   labels:
