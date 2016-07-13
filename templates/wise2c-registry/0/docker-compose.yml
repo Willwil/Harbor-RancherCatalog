@@ -30,9 +30,9 @@ mysql:
     - registry-datavolume
   environment:
     - MYSQL_ROOT_PASSWORD=${DBPASSWD}
-  log_driver: "syslog"
-  log_opt:
-      syslog-address: "tcp://log:1514"
-      syslog-tag: "mysql"
+  #log_driver: "syslog"
+  #log_opt:
+  #    syslog-address: "tcp://log:514"
+  #    syslog-tag: "mysql"
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
