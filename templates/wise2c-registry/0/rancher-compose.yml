@@ -49,3 +49,5 @@
 
 registry-datavolume:
   scale: 1
+log:
+  scale: 1

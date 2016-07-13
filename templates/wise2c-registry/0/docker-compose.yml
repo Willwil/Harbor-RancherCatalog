@@ -9,3 +9,12 @@ registry-datavolume:
     io.rancher.scheduler.affinity: "hostname=agent-1"
     io.rancher.container.start_once: true
 
+log:
+  image: wise2c/harbor-log
+  container_name: wise2c-reg-log
+  volumes_from:
+    - registry-datavolume
+  ports:
+    - 1514:514
+  labels:
+    io.rancher.scheduler.affinity: "hostname=agent-1"
