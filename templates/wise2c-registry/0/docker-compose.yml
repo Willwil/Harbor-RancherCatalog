@@ -17,10 +17,10 @@ registry:
     - 5001:5001
   command:
     ["serve", "/etc/registry/config.yml"]
-  log_driver: "syslog"
-  log_opt:
-      syslog-address: "tcp://127.0.0.1:514"
-      syslog-tag: "registry"
+  #log_driver: "syslog"
+  #log_opt:
+  #    syslog-address: "tcp://127.0.0.1:514"
+  #    syslog-tag: "registry"
   links:
     - log
   volumes:
