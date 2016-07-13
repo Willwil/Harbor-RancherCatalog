@@ -1,14 +1,13 @@
 registry-datavolume:
   image: busybox
   volumes: 
-    - /storage
-    - /var/lib/mysql
-    - /var/log
-    - /etc
+    - ${STORAGEDIR}:/storage
+    - ${MYSQLDIR}:/var/lib/mysql
+    - ${LOGDIR}:/var/log
+    - ${CFGDIR}:/etc
   net: none
   command: /bin/true
   labels:
-    io.rancher.scheduler.affinity: "hostname=agent-1"
     io.rancher.container.start_once: true
 
 log:
