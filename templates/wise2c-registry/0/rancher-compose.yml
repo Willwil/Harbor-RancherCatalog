@@ -46,6 +46,6 @@
       required: true
       default: "/registry/config"
       type: "string"
-      
-registry-data-volume:
+
+registry-datavolume:
   scale: 1
