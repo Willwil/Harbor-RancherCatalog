@@ -12,6 +12,7 @@ registry-datavolume:
   command: /bin/true
   labels:
     io.rancher.container.start_once: true
+    io.rancher.sidekicks: log
 
 log:
   image: wise2c/harbor-log
