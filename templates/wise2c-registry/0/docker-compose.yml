@@ -119,7 +119,6 @@ proxy:
   image: library/nginx:1.9
   volumes_from:
     - registry-datavolume
-  io.rancher.sidekicks: log,registry,mysql,ui,jobservice
   ports:
     - 80:80
     - 443:443
@@ -132,3 +131,4 @@ proxy:
       syslog-tag: "proxy"
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
+    io.rancher.sidekicks: log,registry,mysql,ui,jobservice
