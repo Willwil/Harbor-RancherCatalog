@@ -1,5 +1,6 @@
 log:
   image: wise2c/harbor-log
+  container_name: wise2c-reg-log
   ports:
     - 1514:514
   volumes:
@@ -67,9 +68,6 @@ ui:
     - VERIFY_REMOTE_CERT=on
   links:
     - mysql
-  ports:
-    - 8010:80
-    - 8443:443
   volumes:
     - ${CFGDIR}/ui:/etc/ui
   log_driver: "syslog"
@@ -108,6 +106,7 @@ jobservice:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
 proxy:
   image: library/nginx:1.9
+  container_name: wise2c-reg-proxy
   ports:
     - 80:80
     - 443:443
