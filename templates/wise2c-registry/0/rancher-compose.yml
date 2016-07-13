@@ -45,3 +45,9 @@ log:
   scale: 1
 registry:
   scale: 1
+mysql:
+  scale: 1
+ui:
+  scale: 1
+jobservice:
+  scale: 1
