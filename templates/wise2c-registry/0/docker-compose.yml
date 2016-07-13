@@ -131,4 +131,4 @@ proxy:
       syslog-tag: "proxy"
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
-    io.rancher.sidekicks: log,registry,mysql,ui,jobservice
+    io.rancher.sidekicks: log,registry,mysql,ui,jobservice,registry-datavolume
