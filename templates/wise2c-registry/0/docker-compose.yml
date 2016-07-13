@@ -113,6 +113,7 @@ proxy:
   links:
     - registry
     - ui
+    - jobservice
   log_driver: "syslog"
   log_opt:
       syslog-address: "tcp://log:514"
