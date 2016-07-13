@@ -8,16 +8,19 @@
       label: "Wise2C Registry Mysql Password"
       description: "wise2c registry database password."
       required: true
+      default: "root123"
       type: "string"
     - variable: "URL"
       label: "Wise2C Registry URL"
       description: "wise2c registry URL(don't include 'http:')."
       required: true
+      default: "reg.wise2c.com"
       type: "string"
     - variable: "UIRADMINPWD"
       label: "Wise2C Registry Admin Password"
       description: "wise2c registry admin password."
       required: true
+      default: Harbor,123
       type: "string"
     - variable: "STORAGEDIR"
       label: "Wise2C Registry Backend Storage Forlder"
@@ -29,7 +32,7 @@
       label: "Wise2C Registry Log Forlder"
       description: "Forlder on which to storage wise2c registry logs"
       required: true
-      default: "registry/log"
+      default: "/registry/log"
       type: "string"
     - variable: "CFGDIR"
       label: "Wise2C Registry Config Forlder"

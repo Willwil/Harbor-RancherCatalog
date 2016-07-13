@@ -10,7 +10,7 @@ registry-data-volume:
 log:
   image: wise2c/harbor-log
   container_name: wise2c-reg-log
-  volumes-from:
+  volumes_from:
     - registry-data-volume
   ports:
     - 1514:514
@@ -19,7 +19,7 @@ log:
 registry:
   image: library/registry:2.4.0
   container_name: wise2c-reg-registry
-  volumes-from:
+  volumes_from:
     - registry-data-volume
   environment:
     - GODEBUG=netdns=cgo
@@ -36,7 +36,7 @@ registry:
 mysql:
   image: wise2c/harbor-mysql
   container_name: wise2c-reg-mysql
-  volumes-from:
+  volumes_from:
     - registry-data-volume
   environment:
     - MYSQL_ROOT_PASSWORD=${DBPASSWD}
@@ -70,7 +70,7 @@ ui:
     - EXT_ENDPOINT=https://${URL}
     - TOKEN_URL=http://ui
     - VERIFY_REMOTE_CERT=on
-  volumes-from:
+  volumes_from:
     - registry-data-volume
   links:
     - mysql
@@ -98,7 +98,7 @@ jobservice:
     - GODEBUG=netdns=cgo
     - EXT_ENDPOINT=${UIURL}
     - TOKEN_URL=http://ui
-  volumes-from:
+  volumes_from:
     - registry-data-volume
   links:
     - mysql
@@ -110,7 +110,7 @@ jobservice:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
 proxy:
   image: library/nginx:1.9
-  volumes-from:
+  volumes_from:
     - registry-data-volume
   ports:
     - 80:80
