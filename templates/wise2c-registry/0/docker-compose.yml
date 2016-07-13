@@ -16,6 +16,8 @@ mysql:
   #log_opt:
   #    syslog-address: "tcp://log:1514"
   #    syslog-tag: "mysql"
+  ports:
+    - 3306:3306
   volumes:
     - ${DATADIR}/database:/var/lib/mysql
   labels:
@@ -65,6 +67,9 @@ ui:
     - VERIFY_REMOTE_CERT=on
   links:
     - mysql
+  ports:
+    - 8010:80
+    - 8443:443
   volumes:
     - ${CFGDIR}/ui:/etc/ui
   #log_driver: "syslog"
