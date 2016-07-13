@@ -12,10 +12,10 @@ mysql:
   container_name: wise2c-reg-mysql
   environment:
     - MYSQL_ROOT_PASSWORD=${DBPASSWD}
-  #log_driver: "syslog"
-  #log_opt:
-  #    syslog-address: "tcp://log:1514"
-  #    syslog-tag: "mysql"
+  log_driver: "syslog"
+  log_opt:
+      syslog-address: "tcp://log:514"
+      syslog-tag: "mysql"
   ports:
     - 3306:3306
   volumes:
@@ -32,10 +32,10 @@ registry:
     - 5001:5001
   command:
     ["serve", "/etc/registry/config.yml"]
-  #log_driver: "syslog"
-  #log_opt:
-  #    syslog-address: "tcp://log:1514"
-  #    syslog-tag: "registry"
+  log_driver: "syslog"
+  log_opt:
+      syslog-address: "tcp://log:514"
+      syslog-tag: "registry"
   volumes:
     - ${DATADIR}/registry:/storage
     - ${CFGDIR}/registry:/etc/registry/
@@ -72,10 +72,10 @@ ui:
     - 8443:443
   volumes:
     - ${CFGDIR}/ui:/etc/ui
-  #log_driver: "syslog"
-  #log_opt:
-  #    syslog-address: "tcp://log:1514"
-  #    syslog-tag: "ui"
+  log_driver: "syslog"
+  log_opt:
+      syslog-address: "tcp://log:514"
+      syslog-tag: "ui"
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
 jobservice:
@@ -98,10 +98,10 @@ jobservice:
     - TOKEN_URL=http://ui
   links:
     - mysql
-  #log_driver: "syslog"
-  #log_opt:
-  #    syslog-address: "tcp://log:1514"
-  #    syslog-tag: "jobservice"
+  log_driver: "syslog"
+  log_opt:
+      syslog-address: "tcp://log:514"
+      syslog-tag: "jobservice"
   volumes:
     - ${DATADIR}/job_logs:/var/log/jobs
   labels:
@@ -114,10 +114,10 @@ proxy:
   links:
     - registry
     - ui
-  #log_driver: "syslog"
-  #log_opt:
-  #    syslog-address: "tcp://log:1514"
-  #    syslog-tag: "proxy"
+  log_driver: "syslog"
+  log_opt:
+      syslog-address: "tcp://log:514"
+      syslog-tag: "proxy"
   volumes:
     - ${CFGDIR}/nginx:/etc/nginx
   labels:
