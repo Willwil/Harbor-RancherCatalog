@@ -47,7 +47,5 @@
       default: "/registry/config"
       type: "string"
 
-registry-datavolume:
-  scale: 1
 log:
   scale: 1
