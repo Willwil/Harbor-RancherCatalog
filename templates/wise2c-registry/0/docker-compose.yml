@@ -12,7 +12,7 @@ registry-datavolume:
   command: /bin/true
   labels:
     io.rancher.container.start_once: true
-    io.rancher.sidekicks: log,registry
+    io.rancher.sidekicks: log,mysql
 
 log:
   image: wise2c/harbor-log
@@ -23,22 +23,16 @@ log:
   labels:
     io.rancher.scheduler.affinity: "hostname=agent-1"
 
-registry:
-  image: library/registry:2.4.0
-  container_name: wise2c-reg-registry
+mysql:
+  image: wise2c/harbor-mysql
+  container_name: wise2c-reg-mysql
   volumes_from:
     - registry-datavolume
   environment:
-    - GODEBUG=netdns=cgo
-  ports:
-    - 5001:5001
-  command:
-    ["serve", "/etc/registry/config.yml"]
+    - MYSQL_ROOT_PASSWORD=${DBPASSWD}
   log_driver: "syslog"
   log_opt:
       syslog-address: "tcp://log:1514"
-      syslog-tag: "registry"
+      syslog-tag: "mysql"
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
-
-

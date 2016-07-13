@@ -26,13 +26,13 @@
       label: "Wise2C Registry Data Forlder"
       description: "wise2c registry data DIR."
       required: true
-      default: "/registry/data"
+      default: "/data"
       type: "string"
     - variable: "LOGDIR"
       label: "Wise2C Registry Log Forlder"
       description: "Forlder on which to storage wise2c registry logs"
       required: true
-      default: "/var/log/harbor"
+      default: "/var/log"
       type: "string"
     - variable: "CFGDIR"
       label: "Wise2C Registry Config Forlder"
@@ -44,12 +44,4 @@
 log:
   scale: 1
 registry:
-  scale: 1
-mysql:
-  scale: 1
-ui:
-  scale: 1
-jobservice:
-  scale: 1
-proxy:
   scale: 1
