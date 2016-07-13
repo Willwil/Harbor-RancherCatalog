@@ -1,6 +1,6 @@
 registry-datavolume:
   image: busybox
-  volumes: 
+  volumes:
     - ${LOGDIR}/harbor:/var/log/docker/
     - ${DATADIR}/job_logs:/var/log/jobs
     - ${DATADIR}/database:/var/lib/mysql
@@ -12,6 +12,7 @@ registry-datavolume:
   command: /bin/true
   labels:
     io.rancher.container.start_once: true
+    io.rancher.sidekicks: log,registry,mysql,ui,jobservice,proxy
 
 log:
   image: wise2c/harbor-log
@@ -131,4 +132,3 @@ proxy:
       syslog-tag: "proxy"
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
-    io.rancher.sidekicks: log,registry,mysql,ui,jobservice,registry-datavolume
