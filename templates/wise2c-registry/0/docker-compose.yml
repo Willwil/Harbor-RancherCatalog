@@ -1,10 +1,10 @@
 registry-datavolume:
   image: busybox
   volumes: 
-    - ${STORAGEDIR}:/storage
-    - ${MYSQLDIR}:/var/lib/mysql
-    - ${LOGDIR}:/var/log/docker
-    - ${CFGDIR}:/etc/cfg
+    - /storage
+    - /var/lib/mysql
+    - /var/log/docker
+    - /etc/cfg
   net: none
   command: /bin/true
   labels:
