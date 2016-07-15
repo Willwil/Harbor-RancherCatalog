@@ -8,6 +8,16 @@ log:
   labels:
     io.rancher.scheduler.affinity: "hostname=agent-1"
 
+backend-datavolume:
+  image: busybox
+  container_name: wise2c/harbor-backend-datavolume
+  labels:
+    io.rancher.sidekicks: registry,jobservice
+  volumes:
+    - ${DATADIR}/registry:/storage
+    - ${CFGDIR}/registry:/etc/registry/
+    - ${DATADIR}/job_logs:/var/log/jobs
+
 registry:
   image: library/registry:2.4.0
   container_name: wise2c-reg-registry
@@ -21,12 +31,55 @@ registry:
   log_opt:
       syslog-address: "tcp://127.0.0.1:1514"
       syslog-tag: "registry"
-  volumes:
-    - ${DATADIR}/registry:/storage
-    - ${CFGDIR}/registry:/etc/registry/
+  #volumes:
+  #  - ${DATADIR}/registry:/storage
+  #  - ${CFGDIR}/registry:/etc/registry/
+  volumes_from:
+    - backend-datavolume
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
     
+jobservice:
+  image: wise2c/harbor-jobservice
+  container_name: wise2c-reg-jobservice
+  environment:
+    - MYSQL_HOST=mysql
+    - MYSQL_PORT=3306
+    - MYSQL_USR=root
+    - MYSQL_PWD=root123
+    - UI_SECRET=Nwzq1exKgmgzPviU
+    - CONFIG_PATH=/etc/jobservice/app.conf
+    - REGISTRY_URL=http://registry:5000
+    - VERIFY_REMOTE_CERT=on
+    - MAX_JOB_WORKERS=3
+    - LOG_LEVEL=debug
+    - LOG_DIR=/var/log/jobs
+    - GODEBUG=netdns=cgo
+    - EXT_ENDPOINT=${UIURL}
+    - TOKEN_URL=http://ui
+  links:
+    - mysql
+  log_driver: "syslog"
+  log_opt:
+      syslog-address: "tcp://127.0.0.1:1514"
+      syslog-tag: "jobservice"
+  volumes_from:
+    - backend-datavolume
+  #volumes:
+  #  - ${DATADIR}/job_logs:/var/log/jobs
+  labels:
+    io.rancher.scheduler.affinity:host_label: hostname=agent-1
+
+front-datavolume:
+  image: busybox
+  container_name: wise2c/harbor-front-datavolume
+  volumes:
+    - ${DATADIR}/database:/var/lib/mysql
+    - ${CFGDIR}/ui:/etc/ui
+    - ${CFGDIR}/nginx:/etc/nginx
+  labels:
+    io.rancher.sidekicks: mysql,ui,proxy
+
 mysql:
   image: wise2c/harbor-mysql
   container_name: wise2c-reg-mysql
@@ -38,8 +91,10 @@ mysql:
       syslog-tag: "mysql"
   ports:
     - 3306:3306
-  volumes:
-    - ${DATADIR}/database:/var/lib/mysql
+  #volumes:
+  #  - ${DATADIR}/database:/var/lib/mysql
+  volumes_from:
+    - front-datavolume
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
 
@@ -69,41 +124,14 @@ ui:
     - VERIFY_REMOTE_CERT=on
   links:
     - mysql
-  volumes:
-    - ${CFGDIR}/ui:/etc/ui
+  #volumes:
+  #  - ${CFGDIR}/ui:/etc/ui
+  volumes_from:
+    - front-datavolume
   log_driver: "syslog"
   log_opt:
       syslog-address: "tcp://127.0.0.1:1514"
       syslog-tag: "ui"
-  labels:
-    io.rancher.scheduler.affinity:host_label: hostname=agent-1
-
-jobservice:
-  image: wise2c/harbor-jobservice
-  container_name: wise2c-reg-jobservice
-  environment:
-    - MYSQL_HOST=mysql
-    - MYSQL_PORT=3306
-    - MYSQL_USR=root
-    - MYSQL_PWD=root123
-    - UI_SECRET=Nwzq1exKgmgzPviU
-    - CONFIG_PATH=/etc/jobservice/app.conf
-    - REGISTRY_URL=http://registry:5000
-    - VERIFY_REMOTE_CERT=on
-    - MAX_JOB_WORKERS=3
-    - LOG_LEVEL=debug
-    - LOG_DIR=/var/log/jobs
-    - GODEBUG=netdns=cgo
-    - EXT_ENDPOINT=${UIURL}
-    - TOKEN_URL=http://ui
-  links:
-    - mysql
-  log_driver: "syslog"
-  log_opt:
-      syslog-address: "tcp://127.0.0.1:1514"
-      syslog-tag: "jobservice"
-  volumes:
-    - ${DATADIR}/job_logs:/var/log/jobs
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
 
@@ -121,7 +149,9 @@ proxy:
   log_opt:
       syslog-address: "tcp://127.0.0.1:1514"
       syslog-tag: "proxy"
-  volumes:
-    - ${CFGDIR}/nginx:/etc/nginx
+  #volumes:
+  #  - ${CFGDIR}/nginx:/etc/nginx
+  volumes_from:
+    - front-datavolume
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
