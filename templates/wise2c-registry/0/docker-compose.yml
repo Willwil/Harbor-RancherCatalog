@@ -11,12 +11,16 @@ log:
 backend-datavolume:
   image: busybox
   container_name: wise2c/harbor-backend-datavolume
+  net: none
+  command: /bin/true
   labels:
     io.rancher.sidekicks: registry,jobservice
+    io.rancher.container.start_once: 'true'
   volumes:
     - ${DATADIR}/registry:/storage
     - ${CFGDIR}/registry:/etc/registry/
     - ${DATADIR}/job_logs:/var/log/jobs
+
 
 registry:
   image: library/registry:2.4.0
@@ -77,8 +81,11 @@ front-datavolume:
     - ${DATADIR}/database:/var/lib/mysql
     - ${CFGDIR}/ui:/etc/ui
     - ${CFGDIR}/nginx:/etc/nginx
+  net: none
+  command: /bin/true
   labels:
     io.rancher.sidekicks: mysql,ui,proxy
+    io.rancher.container.start_once: 'true'
 
 mysql:
   image: wise2c/harbor-mysql
