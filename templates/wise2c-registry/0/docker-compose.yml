@@ -1,3 +1,38 @@
+prepare:
+  image: wise2c/harbor-prepare
+  container_name: wise2c-reg-prepare
+  volumes:
+    - ${EXTERNAL_DIR}:/harbor
+  net: none
+  command: /usr/local/bin/python /root/prepare.py
+  environment:
+    - HOSTNAME=${HOSTNAME}
+    - UI_URL_PROTOCOL=${UI_URL_PROTOCOL}
+    - EMAIL_SERVER=${EMAIL_SERVER}
+    - EMAIL_SERVER_PORT=${EMAIL_SERVER_PORT}
+    - EMAIL_USERNAME=${EMAIL_USERNAME}
+    - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+    - EMAIL_FROM=${EMAIL_FROM}
+    - EMAIL_SSL=${EMAIL_SSL}
+    - HARBOR_ADMIN_PASSWORD=${HARBOR_ADMIN_PASSWORD}
+    - AUTH_MODE=${AUTH_MODE}
+    - LDAP_URL=${LDAP_URL}
+    - LDAP_BASEDN=${LDAP_BASEDN}
+    - DB_PASSWORD=${DB_PASSWORD}
+    - SELF_REGISTRATION=${SELF_REGISTRATION}
+    - CUSTOMIZE_CRT=${CUSTOMIZE_CRT}
+    - CRT_COUNTRY=${CRT_COUNTRY}
+    - CRT_STATE=${CRT_STATE}
+    - CRT_LOCATION=${CRT_LOCATION}
+    - CRT_ORGANIZATION=${CRT_ORGANIZATION}
+    - CRT_ORGANIZATIONALUNIT=${CRT_ORGANIZATIONALUNIT}
+    - CRT_COMMONNAME=${CRT_COMMONNAME}
+    - CRT_EMAIL=${CRT_EMAIL}
+    - MAX_JOB_WORKERS=${MAX_JOB_WORKERS}
+    - VERIFY_REMOTE_CERT=${VERIFY_REMOTE_CERT}
+  labels:
+    io.rancher.container.start_once: 'true'
+
 log:
   image: wise2c/harbor-log
   container_name: wise2c-reg-log
