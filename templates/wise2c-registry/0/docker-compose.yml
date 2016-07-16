@@ -34,3 +34,14 @@ prepare:
   labels:
     io.rancher.container.start_once: 'true'
 
+log:
+  image: wise2c/harbor-log
+  container_name: wise2c-reg-log
+  ports:
+    - 1514:514
+  links:
+    - prepare
+  volumes:
+    - ${EXTERNAL_DIR}/log:/var/log/docker/
+  labels:
+    io.rancher.scheduler.affinity: "hostname=agent-1"
