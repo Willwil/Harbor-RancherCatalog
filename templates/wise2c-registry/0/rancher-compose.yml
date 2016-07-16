@@ -21,7 +21,7 @@
     - variable: "UI_URL_PROTOCOL"
       label: "Wise2C Registry URL Protocol"
       description: "The protocol used to access the UI and the token/notification service. By default, this is http. "
-      required: true
+      #required: true
       type: "enum"
       options:
         - https
@@ -38,7 +38,7 @@
       label: "Wise2C Registry Email Server Port"
       description: ""
       required: true
-      default: "25"
+      default: 25
       type: "int"
 
     - variable: "EMAIL_USERNAME"
@@ -65,7 +65,7 @@
     - variable: "EMAIL_SSL"
       label: "Wise2C Registry Email SSL"
       description: ""
-      required: true
+      #required: true
       default: false
       type: "boolean"
 
@@ -79,7 +79,7 @@
     - variable: "AUTH_MODE"
       label: "Wise2C Registry Auth Mode"
       description: "The type of authentication that is used. By default it is db_auth, i.e. the credentials are stored in a database. For LDAP authentication, set this to ldap_auth."
-      required: true
+      #required: true
       type: "enum"
       options:
         - db_auth
@@ -100,15 +100,15 @@
     - variable: "DB_PASSWORD"
       label: "Wise2C Registry DB Password"
       description: "The root password for the mySQL database used for db_auth. Change this password for any production use!"
-      required: true
+      #required: true
       default: "root123"
       type: "password"
 
     - variable: "SELF_REGISTRATION"
       label: "Wise2C Registry Self Registration"
       description: "Enable / Disable the ability for a user to register themselves. When disabled, new users can only be created by the Admin user, only an admin user can create new users in Harbor. NOTE: When auth_mode is set to ldap_auth, self-registration feature is always disabled, and this flag is ignored."
-      required: true
-      default: on
+      #required: true
+      #default: on
       type: "enum"
       options:
         - on
@@ -117,8 +117,8 @@
     - variable: "CUSTOMIZE_CRT"
       label: "Wise2C Registry Custromize CRT"
       description: "When this attribute is on, the prepare script creates private key and root certificate for the generation/verification of the regitry's token. The following attributes:crt_country, crt_state, crt_location, crt_organization, crt_organizationalunit, crt_commonname, crt_email are used as parameters for generating the keys. Set this attribute to off when the key and root certificate are supplied by external sources."
-      required: true
-      default: on
+      #required: true
+      #default: on
       type: "enum"
       options:
         - on
@@ -182,8 +182,8 @@
     - variable: "VERIFY_REMOTE_CERT"
       label: "Wise2C Registry Verify Rmote CRT"
       description: "This flag determines whether or not to verify SSL/TLS certificate when Harbor communicates with a remote registry instance. Setting this attribute to off will bypass the SSL/TLS verification, which is often used when the remote instance has a self-signed or untrusted certificate."
-      required: true
-      default: on
+      #required: true
+      #default: on
       type: "enum"
       options:
         - on
