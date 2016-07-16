@@ -1,10 +1,11 @@
 prepare:
   image: wise2c/harbor-prepare
   container_name: wise2c-reg-prepare
+  volumes:
+    - ${EXTERNAL_DIR}:/harbor
+    - ${OFFICIAL_CRT_DIR}:/cert
   net: none
   command: /usr/local/bin/python /root/prepare.py
-  environment:
-    - HOSTNAME='reg.wise2c.com'
   labels:
     io.rancher.container.start_once: 'true'
 

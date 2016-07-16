@@ -4,6 +4,20 @@
   description: |
     Wise2c Docker Registry
   maintainer: "Chen Leji <chenleji@wise2c.com>"
+  questions:
+
+    - variable: "OFFICIAL_CRT_DIR"
+      label: "Wise2C Registry Official CRT Forlder"
+      description: "Wise2C Registry Official CRT Forlder"
+      default: "/"
+      type: string
+
+    - variable: "EXTERNAL_DIR"
+      label: "Wise2C Registry External Shared Storage Forlder"
+      description: "External shared storage forlder, which is used to store the config/data/log info."
+      required: true
+      default: "/data"
+      type: string
 
 prepare:
   scale: 1
