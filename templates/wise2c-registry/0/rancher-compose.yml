@@ -68,7 +68,7 @@
       label: "Wise2C Registry Email SSL"
       description: ""
       #required: true
-      default: "false"
+      default: false
       type: "boolean"
 
     - variable: "HARBOR_ADMIN_PASSWORD"
