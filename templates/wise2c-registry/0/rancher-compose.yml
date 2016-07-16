@@ -20,14 +20,14 @@
       type: string
 
     - variable: "HOSTNAME"
-      label: "Wise2C Registry Hostname"
+      label: "Hostname"
       description: "The target host's hostname, which is used to access the UI and the registry service."
       required: true
       default: "reg.wise2c.com"
       type: string
 
     - variable: "UI_URL_PROTOCOL"
-      label: "Wise2C Registry URL Protocol"
+      label: "URL Protocol"
       description: "The protocol used to access the UI and the token/notification service. By default, this is http. "
       required: true
       default: "https"
@@ -35,17 +35,17 @@
       options:
         - https
         - http
-        
+
     - variable: "EMAIL_SERVER"
-      label: "Wise2C Registry Email Server"
+      label: "Email Server"
       description: "These parameters are needed for Harbor to be able to send a user a "password reset" email, and are only necessary if that functionality is needed."
       required: true
       default: "smtp.mydomain.com"
       type: string
 
     - variable: "EMAIL_SERVER_PORT"
-      label: "Wise2C Registry Email Server Port"
-      description: ""
+      label: "Email Server Port"
+      description: "Wise2C Registry Email Server Port"
       required: true
       default: 25
       type: int
