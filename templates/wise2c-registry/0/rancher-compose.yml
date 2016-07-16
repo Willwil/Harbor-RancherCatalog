@@ -42,3 +42,17 @@
       required: true
       default: "smtp.mydomain.com"
       type: string
+
+    - variable: "EMAIL_SERVER_PORT"
+      label: "Email Server Port"
+      description: "Wise2C Registry Email Server Port"
+      required: true
+      default: 25
+      type: int
+
+    - variable: "EMAIL_USERNAME"
+      label: "Email Username"
+      description: "Wise2C Registry Email Username"
+      required: true
+      default: "sample_admin@mydomain.com"
+      type: string
