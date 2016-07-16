@@ -38,7 +38,7 @@
 
     - variable: "EMAIL_SERVER"
       label: "Email Server"
-      description: "These parameters are needed for Harbor to be able to send a user a "password reset" email, and are only necessary if that functionality is needed."
+      description: "These parameters are needed for Harbor to be able to send a user a 'password reset' email."
       required: true
       default: "smtp.mydomain.com"
       type: string
