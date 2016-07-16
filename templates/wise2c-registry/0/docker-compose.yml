@@ -67,3 +67,20 @@ registry:
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
     
+mysql:
+  image: wise2c/harbor-mysql
+  container_name: wise2c-reg-mysql
+  #env_file:
+  #  - ${EXTERNAL_DIR}/config/db/env
+  log_driver: "syslog"
+  log_opt:
+      syslog-address: "tcp://127.0.0.1:1514"
+      syslog-tag: "mysql"
+  ports:
+    - 3306:3306
+  links:
+    - prepare
+  volumes:
+    - ${EXTERNAL_DIR}/database:/var/lib/mysql
+  labels:
+    io.rancher.scheduler.affinity:host_label: hostname=agent-1
