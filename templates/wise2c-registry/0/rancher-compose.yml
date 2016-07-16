@@ -46,7 +46,7 @@
     - variable: "EMAIL_SERVER_PORT"
       label: "Email Server Port"
       description: "Wise2C Registry Email Server Port"
-      required: true
+      #required: true
       #default: "25"
       type: int
 
