@@ -9,7 +9,7 @@
     - variable: "OFFICIAL_CRT_DIR"
       label: "Official CRT Forlder"
       description: "Wise2C Registry Official CRT Forlder"
-      default: "/"
+      default: "/root"
       type: string
 
     - variable: "EXTERNAL_DIR"
