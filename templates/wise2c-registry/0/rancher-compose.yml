@@ -8,7 +8,7 @@
       label: "Wise2C Registry External Shared Storage Forlder"
       description: "External shared storage forlder, which is used to store the config/data/log info."
       required: true
-      default: "reg.wise2c.com"
+      default: "/data"
       type: "string"
 
     - variable: "HOSTNAME"
@@ -124,6 +124,12 @@
         - on
         - off
 
+    - variable: "OFFICIAL_CRT_DIR"
+      label: "Wise2C Registry Official CRT Forlder"
+      description: ""
+      default: "/"
+      type: "string"
+
     - variable: "CRT_COUNTRY"
       label: "Wise2C Registry CRT Country"
       description: ""
@@ -183,6 +189,8 @@
         - on
         - off
 
+prepare:
+  scale: 1
 log:
   scale: 1
 registry:
