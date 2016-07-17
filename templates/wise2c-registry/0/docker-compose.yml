@@ -70,8 +70,8 @@ registry:
 mysql:
   image: wise2c/harbor-mysql
   container_name: wise2c-reg-mysql
-  #env_file:
-  #  - ${EXTERNAL_DIR}/config/db/env
+  environment:
+    - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
   log_driver: "syslog"
   log_opt:
       syslog-address: "tcp://127.0.0.1:1514"
@@ -80,8 +80,6 @@ mysql:
     - 3306:3306
   links:
     - prepare
-  #volumes_from:
-  #  - prepare
   volumes:
     - ${EXTERNAL_DIR}/database:/var/lib/mysql
   labels:
@@ -112,7 +110,7 @@ jobservice:
     - mysql
   volumes:
     - ${EXTERNAL_DIR}/log/job_logs:/var/log/jobs
-    - ${EXTERNAL_DIR}/config/jobservice/app.conf:/etc/jobservice/app.conf
+    - ${EXTERNAL_DIR}/config/jobservice:/etc/jobservice
   log_driver: "syslog"
   log_opt:
       syslog-address: "tcp://127.0.0.1:1514"
