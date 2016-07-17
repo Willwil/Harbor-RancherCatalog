@@ -80,7 +80,61 @@ mysql:
     - 3306:3306
   links:
     - prepare
+  #volumes_from:
+  #  - prepare
   volumes:
     - ${EXTERNAL_DIR}/database:/var/lib/mysql
+  labels:
+    io.rancher.scheduler.affinity:host_label: hostname=agent-1
+
+ui:
+  image: wise2c/harbor-ui
+  container_name: wise2c-reg-ui
+  #env_file:
+  #  - ${EXTERNAL_DIR}/config/ui/env
+  links:
+    - mysql
+  volumes:
+    - ${EXTERNAL_DIR}/config/ui:/etc/ui
+  log_driver: "syslog"
+  log_opt:
+      syslog-address: "tcp://127.0.0.1:1514"
+      syslog-tag: "ui"
+  labels:
+    io.rancher.scheduler.affinity:host_label: hostname=agent-1
+
+jobservice:
+  image: wise2c/harbor-jobservice
+  container_name: wise2c-reg-jobservice
+  #env_file:
+  #  - ${EXTERNAL_DIR}/config/jobservice/env
+  links:
+    - mysql
+  volumes:
+    - ${EXTERNAL_DIR}/log/job_logs:/var/log/jobs
+    - ${EXTERNAL_DIR}/config/jobservice/app.conf:/etc/jobservice/app.conf
+  log_driver: "syslog"
+  log_opt:
+      syslog-address: "tcp://127.0.0.1:1514"
+      syslog-tag: "jobservice"
+  labels:
+    io.rancher.scheduler.affinity:host_label: hostname=agent-1
+
+proxy:
+  image: library/nginx:1.9
+  container_name: wise2c-reg-mysql
+  ports:
+    - 80:80
+    - 443:443
+  links:
+    - registry
+    - ui
+    - jobservice
+  volumes:
+    - ${EXTERNAL_DIR}/config/nginx:/etc/nginx
+  log_driver: "syslog"
+  log_opt:
+      syslog-address: "tcp://127.0.0.1:1514"
+      syslog-tag: "proxy"
   labels:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
