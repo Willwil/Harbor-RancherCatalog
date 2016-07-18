@@ -135,12 +135,6 @@
         - on
         - off
 
-    - variable: "OFFICIAL_CRT_DIR"
-      label: "Wise2C Registry Official CRT Forlder"
-      description: ""
-      default: "/"
-      type: string
-
     - variable: "CRT_COUNTRY"
       label: "Wise2C Registry CRT Country"
       description: ""
