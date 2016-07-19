@@ -1,5 +1,5 @@
 prepare:
-  image: registry.aliyuncs.com/ljchen/harbor-prepare
+  image: registry.aliyuncs.com/ljchen/harbor-prepare:v0.1
   container_name: wise2c-reg-prepare
   volumes:
     - ${EXTERNAL_DIR}:/harbor
@@ -35,7 +35,7 @@ prepare:
     io.rancher.container.start_once: 'true'
 
 log:
-  image: registry.aliyuncs.com/ljchen/harbor-log
+  image: registry.aliyuncs.com/ljchen/harbor-log:v0.1
   container_name: wise2c-reg-log
   ports:
     - 1514:514
@@ -68,7 +68,7 @@ registry:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
     
 mysql:
-  image: registry.aliyuncs.com/ljchen/harbor-mysql
+  image: registry.aliyuncs.com/ljchen/harbor-mysql:v0.1
   container_name: wise2c-reg-mysql
   environment:
     - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
@@ -86,7 +86,7 @@ mysql:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
 
 ui:
-  image: registry.aliyuncs.com/ljchen/harbor-ui
+  image: registry.aliyuncs.com/ljchen/harbor-ui:v0.1
   container_name: wise2c-reg-ui
   links:
     - mysql
@@ -100,7 +100,7 @@ ui:
     io.rancher.scheduler.affinity:host_label: hostname=agent-1
 
 jobservice:
-  image: registry.aliyuncs.com/ljchen/harbor-jobservice
+  image: registry.aliyuncs.com/ljchen/harbor-jobservice:v0.1
   container_name: wise2c-reg-jobservice
   links:
     - mysql
