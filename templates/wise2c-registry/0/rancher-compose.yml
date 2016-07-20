@@ -10,13 +10,14 @@
       label: "Shared Storage Volume Driver"
       description: "External Shared Storage Forlder"
       required: true
+      default: "convoy-nfs"
       type: string
 
     - variable: "EXTERNAL_DIR"
       label: "External Shared Storage Volume"
       description: "External shared storage forlder, which is used to store the config/data/log info."
       required: true
-      default: "/data"
+      default: "harbor"
       type: string
 
     - variable: "HOSTNAME"
