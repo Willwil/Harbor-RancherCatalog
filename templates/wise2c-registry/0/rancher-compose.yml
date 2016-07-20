@@ -6,10 +6,10 @@
   maintainer: "Chen Leji <chenleji@wise2c.com>"
   questions:
 
-    - variable: "OFFICIAL_CRT_DIR"
-      label: "Official CRT Forlder"
-      description: "Wise2C Registry Official CRT Forlder"
-      default: "/root"
+    - variable: "VOLUME_DRIVER"
+      label: "Shared Storage Volume Driver"
+      description: "External Shared Storage Forlder"
+      required: true
       type: string
 
     - variable: "EXTERNAL_DIR"

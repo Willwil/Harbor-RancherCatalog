@@ -1,9 +1,9 @@
 prepare:
   image: registry.aliyuncs.com/ljchen/harbor-prepare:v0.1
   container_name: wise2c-reg-prepare
+  volume_driver: ${VOLUME_DRIVER}
   volumes:
     - ${EXTERNAL_DIR}:/harbor
-    - ${OFFICIAL_CRT_DIR}:/cert
   net: none
   command: /usr/local/bin/python /root/prepare.py
   environment:
@@ -41,6 +41,7 @@ log:
     - 1514:514
   links:
     - prepare
+  volume_driver: ${VOLUME_DRIVER}
   volumes:
     - ${EXTERNAL_DIR}/log:/var/log/docker/
   labels:
@@ -61,6 +62,7 @@ registry:
   log_opt:
       syslog-address: "tcp://127.0.0.1:1514"
       syslog-tag: "registry"
+  volume_driver: ${VOLUME_DRIVER}
   volumes:
     - ${EXTERNAL_DIR}/storage:/storage
     - ${EXTERNAL_DIR}/config/registry:/etc/registry/
@@ -80,6 +82,7 @@ mysql:
     - 3306:3306
   links:
     - prepare
+  volume_driver: ${VOLUME_DRIVER}
   volumes:
     - ${EXTERNAL_DIR}/database:/var/lib/mysql
   labels:
@@ -104,6 +107,7 @@ jobservice:
   container_name: wise2c-reg-jobservice
   links:
     - mysql
+  volume_driver: ${VOLUME_DRIVER}
   volumes:
     - ${EXTERNAL_DIR}/log/job_logs:/var/log/jobs
     - ${EXTERNAL_DIR}/config/jobservice:/etc/jobservice
@@ -124,6 +128,7 @@ proxy:
     - registry
     - ui
     - jobservice
+  volume_driver: ${VOLUME_DRIVER}
   volumes:
     - ${EXTERNAL_DIR}/config/nginx:/etc/nginx
   log_driver: "syslog"
