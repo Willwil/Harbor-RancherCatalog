@@ -6,10 +6,10 @@ prepare:
     - ${EXTERNAL_DIR}:/harbor
     - ${EXTERNAL_DIR}-log:/var/log/docker/
     - ${EXTERNAL_DIR}-storage:/storage
-    - ${EXTERNAL_DIR}-config-registry:/etc/registry/
     - ${EXTERNAL_DIR}-database:/var/lib/mysql
-    - ${EXTERNAL_DIR}-config-ui:/etc/ui
     - ${EXTERNAL_DIR}-log-job_logs:/var/log/jobs
+    - ${EXTERNAL_DIR}-config-ui:/etc/ui
+    - ${EXTERNAL_DIR}-config-registry:/etc/registry/
     - ${EXTERNAL_DIR}-config-jobservice:/etc/jobservice
     - ${EXTERNAL_DIR}-config-nginx:/etc/nginx
   net: none
@@ -50,11 +50,11 @@ log:
     - 1514:514
   links:
     - prepare
-  volume_driver: ${VOLUME_DRIVER}
-  volumes:
-    - ${EXTERNAL_DIR}/log:/var/log/docker/
-  labels:
-    io.rancher.scheduler.affinity: "hostname=agent-1"
+  #volume_driver: ${VOLUME_DRIVER}
+  #volumes:
+  #  - ${EXTERNAL_DIR}/log:/var/log/docker/
+  volumes_from:
+    - prepare
 
 registry:
   image: library/registry:2.4.0
@@ -75,7 +75,8 @@ registry:
   #volumes:
   #  - ${EXTERNAL_DIR}/storage:/storage
   #  - ${EXTERNAL_DIR}/config/registry:/etc/registry/
-  volumes_from: prepare
+  volumes_from: 
+    - prepare
 
     
 mysql:
@@ -94,7 +95,8 @@ mysql:
   #volume_driver: ${VOLUME_DRIVER}
   #volumes:
   #  - ${EXTERNAL_DIR}/database:/var/lib/mysql
-  volumes_from: prepare
+  volumes_from: 
+    - prepare
 
 ui:
   image: registry.aliyuncs.com/ljchen/harbor-ui
@@ -108,7 +110,8 @@ ui:
   #volume_driver: ${VOLUME_DRIVER}
   #volumes:
   #  - ${EXTERNAL_DIR}/config/ui:/etc/ui
-  volumes_from: prepare
+  volumes_from: 
+    - prepare
 
 jobservice:
   image: registry.aliyuncs.com/ljchen/harbor-jobservice
@@ -123,7 +126,8 @@ jobservice:
   #volumes:
   #  - ${EXTERNAL_DIR}/log/job_logs:/var/log/jobs
   #  - ${EXTERNAL_DIR}/config/jobservice:/etc/jobservice
-  volumes_from: prepare
+  volumes_from: 
+    - prepare
 
 proxy:
   image: library/nginx:1.9
@@ -142,4 +146,5 @@ proxy:
   #volume_driver: ${VOLUME_DRIVER}
   #volumes:
   #  - ${EXTERNAL_DIR}/config/nginx:/etc/nginx
-  volumes_from: prepare
+  volumes_from: 
+    - prepare
