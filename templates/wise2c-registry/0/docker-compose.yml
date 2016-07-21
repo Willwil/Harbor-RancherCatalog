@@ -1,5 +1,5 @@
 prepare:
-  image: registry.aliyuncs.com/ljchen/harbor-prepare
+  image: registry.aliyuncs.com/ljchen/harbor-prepare:v0.2
   container_name: wise2c-reg-prepare
   volume_driver: ${VOLUME_DRIVER}
   volumes:
@@ -43,7 +43,7 @@ prepare:
     io.rancher.container.start_once: 'true'
 
 #log:
-#  image: registry.aliyuncs.com/ljchen/harbor-log
+#  image: registry.aliyuncs.com/ljchen/harbor-log:v0.2
 #  container_name: wise2c-reg-log
 #  ports:
 #    - 1514:514
@@ -74,7 +74,7 @@ registry:
     - ${EXTERNAL_DIR}-config-registry:/etc/registry/
     
 mysql:
-  image: registry.aliyuncs.com/ljchen/harbor-mysql
+  image: registry.aliyuncs.com/ljchen/harbor-mysql:v0.2
   container_name: wise2c-reg-mysql
   environment:
     - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
@@ -91,7 +91,7 @@ mysql:
     - ${EXTERNAL_DIR}-database:/var/lib/mysql
 
 ui:
-  image: registry.aliyuncs.com/ljchen/harbor-ui
+  image: registry.aliyuncs.com/ljchen/harbor-ui:v0.2
   container_name: wise2c-reg-ui
   links:
     - mysql
@@ -104,7 +104,7 @@ ui:
     - ${EXTERNAL_DIR}-config-ui:/etc/ui
 
 jobservice:
-  image: registry.aliyuncs.com/ljchen/harbor-jobservice
+  image: registry.aliyuncs.com/ljchen/harbor-jobservice:v0.2
   container_name: wise2c-reg-jobservice
   links:
     - mysql
