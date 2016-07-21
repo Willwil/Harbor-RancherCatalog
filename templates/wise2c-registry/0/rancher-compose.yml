@@ -8,14 +8,14 @@
 
     - variable: "VOLUME_DRIVER"
       label: "Shared Storage Volume Driver"
-      description: "External Shared Storage Forlder"
+      description: "Shared storage volume driver."
       required: true
       default: "convoy-nfs"
       type: string
 
     - variable: "EXTERNAL_DIR"
-      label: "External Shared Storage Volume"
-      description: "External shared storage forlder, which is used to store the config/data/log info."
+      label: "Shared Storage Volume"
+      description: "shared storage volume.(You should copy your Cert & Key files to this volume under '/cert' forder, such as /cert/reg.wise2c.com.crt & /cert/reg.wise2c.com.key)."
       required: true
       default: "harbor"
       type: string
