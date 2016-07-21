@@ -41,7 +41,7 @@ prepare:
     - VERIFY_REMOTE_CERT=${VERIFY_REMOTE_CERT}
   labels:
     io.rancher.container.start_once: 'true'
-    io.rancher.sidekicks: log, registry, mysql, ui, jobservice, proxy
+    io.rancher.sidekicks: log, registry, mysql
 
 log:
   image: registry.aliyuncs.com/ljchen/harbor-log
@@ -95,6 +95,8 @@ mysql:
   volume_driver: ${VOLUME_DRIVER}
   volumes:
     - ${EXTERNAL_DIR}-database:/var/lib/mysql
+  labels:
+    o.rancher.sidekicks: ui, jobservice
   #volumes_from: 
   #  - prepare
 
@@ -110,6 +112,7 @@ ui:
   volume_driver: ${VOLUME_DRIVER}
   volumes:
     - ${EXTERNAL_DIR}-config-ui:/etc/ui
+  labels:
   #volumes_from: 
   #  - prepare
 
@@ -126,6 +129,8 @@ jobservice:
   volumes:
     - ${EXTERNAL_DIR}-log-job_logs:/var/log/jobs
     - ${EXTERNAL_DIR}-config-jobservice:/etc/jobservice
+  labels:
+    o.rancher.sidekicks: proxy
   #volumes_from: 
   #  - prepare
 
