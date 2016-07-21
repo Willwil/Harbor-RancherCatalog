@@ -41,7 +41,7 @@ prepare:
     - VERIFY_REMOTE_CERT=${VERIFY_REMOTE_CERT}
   labels:
     io.rancher.container.start_once: 'true'
-    #io.rancher.sidekicks: log, registry, mysql, ui, jobservice, proxy
+    io.rancher.sidekicks: log, registry, mysql, ui, jobservice, proxy
 
 log:
   image: registry.aliyuncs.com/ljchen/harbor-log
