@@ -113,6 +113,7 @@ ui:
   volumes:
     - ${EXTERNAL_DIR}-config-ui:/etc/ui
   labels:
+    io.rancher.sidekicks: proxy
   #volumes_from: 
   #  - prepare
 
