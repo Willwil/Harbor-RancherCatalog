@@ -96,7 +96,7 @@ mysql:
   volumes:
     - ${EXTERNAL_DIR}-database:/var/lib/mysql
   labels:
-    o.rancher.sidekicks: ui, jobservice
+    io.rancher.sidekicks: ui, jobservice
   #volumes_from: 
   #  - prepare
 
@@ -130,7 +130,7 @@ jobservice:
     - ${EXTERNAL_DIR}-log-job_logs:/var/log/jobs
     - ${EXTERNAL_DIR}-config-jobservice:/etc/jobservice
   labels:
-    o.rancher.sidekicks: proxy
+    io.rancher.sidekicks: proxy
   #volumes_from: 
   #  - prepare
 
