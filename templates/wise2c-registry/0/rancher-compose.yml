@@ -197,8 +197,8 @@
 
 prepare:
   scale: 1
-log:
-  scale: 1
+#log:
+#  scale: 1
 registry:
   scale: 1
 mysql:
