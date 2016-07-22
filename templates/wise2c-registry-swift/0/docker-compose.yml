@@ -15,6 +15,11 @@ prepare:
   net: none
   command: /usr/local/bin/python /root/prepare.py
   environment:
+    - BACKEND_STORAGE_TYPE=${BACKEND_STORAGE_TYPE}
+    - SWIFT_AUTH_URL=${SWIFT_AUTH_URL}
+    - SWIFT_USER_NAME=${SWIFT_USER_NAME}
+    - SWIFT_PASSWD=${SWIFT_PASSWD}
+    - SWIFT_CONTAINER=${SWIFT_CONTAINER}
     - HOSTNAME=${HOSTNAME}
     - UI_URL_PROTOCOL=${UI_URL_PROTOCOL}
     - EMAIL_SERVER=${EMAIL_SERVER}

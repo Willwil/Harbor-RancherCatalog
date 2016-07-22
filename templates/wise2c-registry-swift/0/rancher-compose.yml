@@ -15,9 +15,47 @@
 
     - variable: "EXTERNAL_DIR"
       label: "Shared Storage Volume"
-      description: "shared storage volume.(You should copy your Cert & Key files to this volume under '/cert' forder, such as /cert/reg.wise2c.com.crt & /cert/reg.wise2c.com.key)."
+      description: "shared storage volume, which is used to sotrage configuration files.(You should copy your Cert & Key files to this volume under '/cert' forder, such as /cert/reg.wise2c.com.crt & /cert/reg.wise2c.com.key)."
       required: true
       default: "harbor"
+      type: string
+
+    - variable: "BACKEND_STORAGE_TYPE"
+      label: "Backend Storage Type"
+      description: "Backend storage type."
+      required: true
+      default: "SWIFT"
+      type: enum
+      options:
+        - NAS
+        - SWIFT
+
+    - variable: "SWIFT_AUTH_URL"
+      label: "Swift Authen URL"
+      description: "Swift authen URL."
+      required: true
+      default: ""
+      type: string
+
+    - variable: "SWIFT_USER_NAME"
+      label: "Swift Authen User Name"
+      description: "Swift authen user name."
+      required: true
+      default: ""
+      type: string
+
+    - variable: "SWIFT_PASSWD"
+      label: "Swift Authen Password"
+      description: "Swift authen password."
+      required: true
+      default: ""
+      type: string
+
+    - variable: "SWIFT_CONTAINER"
+      label: "Swift Container"
+      description: "Swift container which is used to storage images."
+      required: true
+      default: ""
       type: string
 
     - variable: "HOSTNAME"
