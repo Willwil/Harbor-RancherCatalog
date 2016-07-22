@@ -1,5 +1,5 @@
 .catalog:
-  name: Wise2C-Registry
+  name: Wise2C-Registry-Swift
   version: v0.1
   description: |
     Wise2c Docker Registry
