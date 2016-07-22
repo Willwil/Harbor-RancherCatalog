@@ -1,5 +1,5 @@
 .catalog:
-  name: Wise2C-Registry-Swift
+  name: Wise2C-Registry
   version: v0.1
   description: |
     Wise2c Docker Registry
@@ -33,28 +33,24 @@
     - variable: "SWIFT_AUTH_URL"
       label: "Swift Authen URL"
       description: "Swift authen URL."
-      required: true
       default: ""
       type: string
 
     - variable: "SWIFT_USER_NAME"
       label: "Swift Authen User Name"
       description: "Swift authen user name."
-      required: true
       default: ""
       type: string
 
     - variable: "SWIFT_PASSWD"
       label: "Swift Authen Password"
       description: "Swift authen password."
-      required: true
       default: ""
       type: string
 
     - variable: "SWIFT_CONTAINER"
       label: "Swift Container"
       description: "Swift container which is used to storage images."
-      required: true
       default: ""
       type: string
 
